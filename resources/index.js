@@ -1,9 +1,6 @@
-var express = require('express');
-var app = express();
-const PORT = process.env.PORT || 5050
-app.get('/', (req, res) => {
-    res.json({status: "ok"});
-})
-app.listen(PORT, function () {
-    console.log(`Server listening at port: ${PORT}!`);
-});
+const app = require('./server.js');
+
+const {onRequest} = require("firebase-functions/v2/https");
+const logger = require("firebase-functions/logger");
+
+exports.api = onRequest(app);

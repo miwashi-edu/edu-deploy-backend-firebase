@@ -23,6 +23,6 @@ curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebas
 cd functions
 npm install express dotenv
 cd ..
-firabase emulators:start
+firebase emulators:start
 firebase deploy
 ```

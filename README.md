@@ -13,8 +13,8 @@ firebase login
 ```bash
 cd ~
 cd ws
-mkdir deploytest
-cd deploytest
+mkdir test-firebase-functions
+cd test-firebase-functions
 firebase init function
 curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/index.js -o ./functions/index.js
 curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/firebase.json -o ./functions/firebase.json

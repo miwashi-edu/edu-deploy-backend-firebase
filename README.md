@@ -4,6 +4,9 @@
 
 ```bash
 npm install -g firebase-tools
+# eller
+curl -sL https://firebase.tools | bash
+
 firebase login
 ```
 

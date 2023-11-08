@@ -49,4 +49,6 @@ firebase emulators:start
 
 ```bash
 firebase deploy --only functions
+
+# Titta efter: Function URL ex: (helloWorld(us-central1)): https://helloworld-rnxyymlwaq-uc.a.run.app
 ```

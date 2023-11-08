@@ -30,7 +30,7 @@ EOF
 ### ./functions/firebase.json
 
 ```bash
-cat > ./functions/firebase.json << EOF
+cat > ./functions/firebase.json << 'EOF'
 {
   "functions": {
     "predeploy": []
@@ -55,7 +55,7 @@ EOF
 
 ### ./functions/server.js
 ```bash
-cat > ./functions/server.js << EOF
+cat > ./functions/server.js << 'EOF'
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -71,14 +71,29 @@ EOF
 ### ./functions/service.js
 
 ```bash
-cat > ./functions/service.js << EOF
+cat > ./functions/service.js << 'EOF'
 require('dotenv').config();
 const app = require('./server.js');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`http server listening on port ${PORT}`)
+    console.log(`http server listening on port ${PORT}`);
 });
 EOF
 ```
 
+## Starta med node
+```
+node ./functions/serivice.js
+```
+
+
+## Emulator
+```
+firebase emulators:start
+```
+
+## Firebase
+```
+firebase deploy --only functions
+```

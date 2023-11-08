@@ -41,6 +41,8 @@ cd functions
 npm install
 cd ..
 firebase emulators:start
+# Kopiera den webbadess som innehåller functions: ex: http://127.0.0.1:4000/functions
+# Från svaret, hitta adressen till din server.
 ```
 
 ### Första deploy

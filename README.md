@@ -27,32 +27,6 @@ exports.api = onRequest(app);
 EOF
 ```
 
-### ./functions/firebase.json
-
-```bash
-cat > ./functions/firebase.json << 'EOF'
-{
-  "functions": {
-    "predeploy": []
-  },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "api"
-      }
-    ]
-  }
-}
-EOF
-```
-
 ### ./functions/server.js
 ```bash
 cat > ./functions/server.js << 'EOF'

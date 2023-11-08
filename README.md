@@ -1,54 +1,83 @@
 # edu-deploy-backend-firebase
 
-## Before
-
-```bash
-npm install -g firebase-tools
-# eller
-curl -sL https://firebase.tools | bash
-
-firebase login
-```
-
-
 ## Instructions
 
-### Skapa projekt
+### Skapa egen app
 ```bash
 cd ~
 cd ws
-mkdir test-firebase-functions
 cd test-firebase-functions
-firebase init functions
-```
-
-### Svar på frågorna
-```bash
-? Please select an option: Use an existing project
-? Select a default Firebase project for this directory: [Välj ett projekt du redan skapa med Blaze plan]
-? What language would you like to use to write Cloud Functions? JavaScript
-? Do you want to use ESLint to catch probable bugs and enforce style? No
-✔  Wrote functions/package.json
-✔  Wrote functions/index.js
-✔  Wrote functions/.gitignore
-? Do you want to install dependencies with npm now? No
-```
-
-### Testa lokalt
-
-```bash
 cd functions
-npm install
+npm install express
+npm install dotenv
 cd ..
-firebase emulators:start
-# Kopiera den webbadess som innehåller functions: ex: http://127.0.0.1:4000/functions
-# Från svaret, hitta adressen till din server.
 ```
 
-### Första deploy
+
+### ./functions/index.js
 
 ```bash
-firebase deploy --only functions
+cat > ./functions/index.js << EOF
+const app = require('./server.js');
 
-# Titta efter: Function URL ex: (helloWorld(us-central1)): https://helloworld-rnxyymlwaq-uc.a.run.app
+const {onRequest} = require("firebase-functions/v2/https");
+const logger = require("firebase-functions/logger");
+
+exports.api = onRequest(app);
+EOF
 ```
+
+### ./functions/firebase.json
+
+```bash
+cat > ./functions/firebase.json << EOF
+{
+  "functions": {
+    "predeploy": []
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "api"
+      }
+    ]
+  }
+}
+```
+
+### ./functions/server.js
+```bash
+cat > ./functions/server.js << EOF
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.get('/', (req, res) => {
+   res.json({status: "ok"});
+});
+
+module.exports = app;
+EOF
+```
+
+### ./functions/service.js
+
+```bash
+cat > ./functions/service.js << EOF
+require('dotenv').config();
+const app = require('./server.js');
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+    console.log(`http server listening on port ${PORT}`)
+});
+EOF
+```
+

@@ -37,6 +37,9 @@ firebase init functions
 ### Testa lokalt
 
 ```bash
+cd functions
+npm install
+cd ..
 firebase emulators:start
 ```
 

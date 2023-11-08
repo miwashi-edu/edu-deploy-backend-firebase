@@ -50,6 +50,7 @@ cat > ./functions/firebase.json << EOF
     ]
   }
 }
+EOF
 ```
 
 ### ./functions/server.js

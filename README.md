@@ -13,19 +13,35 @@ firebase login
 
 ## Instructions
 
+### Skapa projekt
 ```bash
 cd ~
 cd ws
 mkdir test-firebase-functions
 cd test-firebase-functions
 firebase init functions
-curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/index.js -o ./functions/index.js
-curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/firebase.json -o ./functions/firebase.json
-curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/server.js -o ./functions/server.js
-curl -L https://raw.githubusercontent.com/miwashi-edu/edu-deploy-backend-firebase/main/resources/service.js -o ./functions/service.js
-cd functions
-npm install express dotenv
-cd ..
+```
+
+### Svar på frågorna
+```bash
+? Please select an option: Use an existing project
+? Select a default Firebase project for this directory: [Välj ett projekt du redan skapa med Blaze plan]
+? What language would you like to use to write Cloud Functions? JavaScript
+? Do you want to use ESLint to catch probable bugs and enforce style? No
+✔  Wrote functions/package.json
+✔  Wrote functions/index.js
+✔  Wrote functions/.gitignore
+? Do you want to install dependencies with npm now? No
+```
+
+### Testa lokalt
+
+```bash
 firebase emulators:start
-firebase deploy
+```
+
+### Första deploy
+
+```bash
+firebase deploy --only functions
 ```

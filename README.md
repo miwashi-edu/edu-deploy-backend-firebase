@@ -18,7 +18,7 @@ cd ..
 
 ```bash
 cat > ./functions/index.js << EOF
-const app = require('./server.js');
+const app = require('./app.js');
 
 const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
@@ -27,7 +27,7 @@ exports.api = onRequest(app);
 EOF
 ```
 
-### ./functions/server.js
+### ./functions/app.js
 ```bash
 cat > ./functions/server.js << 'EOF'
 const express = require('express');
@@ -45,7 +45,7 @@ EOF
 ### ./functions/service.js
 
 ```bash
-cat > ./functions/service.js << 'EOF'
+cat > ./functions/app.js << 'EOF'
 require('dotenv').config();
 const app = require('./server.js');
 const PORT = process.env.PORT || 3000;

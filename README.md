@@ -58,7 +58,7 @@ EOF
 
 ## Starta med node
 ```
-node ./functions/serivice.js
+node ./functions/service.js
 ```
 
 

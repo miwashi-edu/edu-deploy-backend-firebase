@@ -1,54 +1,36 @@
 # edu-deploy-backend-firebase
 
-## Before
-
-```bash
-npm install -g firebase-tools
-# eller
-curl -sL https://firebase.tools | bash
-
-firebase login
-```
-
-
 ## Instructions
 
-### Skapa projekt
+> Ändra projektstruktur till ./src istället för ./functions
+
+### Byt namn på functions
 ```bash
 cd ~
 cd ws
-mkdir test-firebase-functions
 cd test-firebase-functions
-firebase init functions
+mv functions src
 ```
 
-### Svar på frågorna
-```bash
-? Please select an option: Use an existing project
-? Select a default Firebase project for this directory: [Välj ett projekt du redan skapa med Blaze plan]
-? What language would you like to use to write Cloud Functions? JavaScript
-? Do you want to use ESLint to catch probable bugs and enforce style? No
-✔  Wrote functions/package.json
-✔  Wrote functions/index.js
-✔  Wrote functions/.gitignore
-? Do you want to install dependencies with npm now? No
-```
-
-### Testa lokalt
+### Ändra firebase.json
 
 ```bash
-cd functions
-npm install
-cd ..
-firebase emulators:start
-# Kopiera den webbadess som innehåller functions: ex: http://127.0.0.1:4000/functions
-# Från svaret, hitta adressen till din server.
+cat > firebase.json << 'EOF'
+{
+  "functions": [
+    {
+      "source": "src",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}
+EOF
 ```
 
-### Första deploy
-
-```bash
-firebase deploy --only functions
-
-# Titta efter: Function URL ex: (helloWorld(us-central1)): https://helloworld-rnxyymlwaq-uc.a.run.app
-```

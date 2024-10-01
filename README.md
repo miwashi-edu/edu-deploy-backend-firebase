@@ -29,7 +29,7 @@ EOF
 
 ### ./functions/app.js
 ```bash
-cat > ./functions/server.js << 'EOF'
+cat > ./functions/app.js << 'EOF'
 const express = require('express');
 const app = express();
 app.use(express.json());
